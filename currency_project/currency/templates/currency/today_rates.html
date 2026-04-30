@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Курси на сьогодні</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 60%; }
+        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+        th { background-color: #f0f0f0; }
+        nav a { margin-right: 16px; text-decoration: none; color: #0066cc; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'currency_list' %}">Всі курси</a>
+        <a href="{% url 'today_rates' %}">Курси на сьогодні</a>
+    </nav>
+    <h1>Курси валют на {{ today }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Назва валюти</th>
+                <th>Курс купівлі (грн)</th>
+                <th>Курс продажу (грн)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for currency in currencies %}
+            <tr>
+                <td>{{ currency.name }}</td>
+                <td>{{ currency.buy_rate }}</td>
+                <td>{{ currency.sell_rate }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">Немає курсів на сьогодні</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
